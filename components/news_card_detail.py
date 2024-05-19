@@ -11,14 +11,35 @@ def card_detail(idx):
     # TODO: Check if summary and key takeaways of this article exists in session state.
     # If it exists, render it instead of calling snowflake arctic api
   
-    st.write(f"Summary of article {idx}")
     sample_img = "statics/imgs/the-new-york-times-logo.jpg" #TODO: Remove this in final version as this is just for testing
-    st.image(sample_img)    
+    st.image(sample_img, width = 200)
     
     # TODO: Adjust the width of dialog
     # TODO: Add line breaks to text
     # TODO: Replace the text with result from arctic
-    st.header('Summary')
-    st.text(text)
-    st.header('Key Takeaways')
-    st.text(text)
+
+    # -- Style 1 --
+    # with st.expander('Summary'):
+    #     st.markdown(text)
+
+    # col1, col2, col3 = st.columns(3)
+
+    # with col1:
+    #     st.button("Simplify", key="k-1")
+    # with col2:
+    #     st.button("Takeaways", key="k-2")
+    # with col3:
+    #     st.button("Justify", key="k-3")
+
+    
+    # -- Style 2 --
+    tab1, tab2, tab3 = st.tabs(["Summary", "Takeaways", "Justify"])
+
+    with tab1:
+        st.markdown(text)
+
+    with tab2:
+        st.markdown(text)
+
+    with tab3:
+        st.markdown(text)

@@ -13,6 +13,7 @@ sys.path.insert(1, "./components/")
 from pages import Main
 
 st.set_page_config(
+    layout="wide",
     page_title="Bellman - Your One-Stop Source for AI News",
     page_icon="🤖",
 )
