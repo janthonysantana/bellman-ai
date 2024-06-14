@@ -36,7 +36,7 @@ def get_ai_texts(article):
 def populate_db_from_feeds():
     all_new_articles = []
     for feed_key, feed_attrs in rss_feeds.items():
-        selector = feed_attrs["selector"]
+        # selector = feed_attrs["selector"]
 
         articles = get_rss_feed_data(feed_key, feed_attrs["url"])
         articles = filter(lambda article: not article_is_excluded(article, feed_attrs), articles)

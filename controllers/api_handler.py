@@ -26,7 +26,7 @@ rss_feeds = {
     "Forbes": {
         "url": "https://www.forbes.com/innovation/feed"
     },
-    "MIT Technology Review": {},
+    # "MIT Technology Review": {},
     "IEEE Spectrum": {
         "url": "https://ieeetv.ieee.org/channel_rss/channel_7/rss"
     },
@@ -102,8 +102,25 @@ def get_rss_feed_data(source_name, url):
 
     articles = []
 
+    format_strings = [
+        '%a, %d %b %Y %H:%M:%S %Z',
+        '%a, %d %b %Y %H:%M:%S %z',
+        '%Y-%m-%dT%H:%M:%S%z'
+    ]
+
     for entry in feed.entries:
-        timestamp = datetime.strptime(entry.get("published"), "%a, %d %b %Y %H:%M:%S %Z")
+        entry_published = entry.get("published")
+        timestamp = None
+
+        for format_str in format_strings:
+            try:
+                timestamp = datetime.strptime(entry_published, format_str)
+                break  # Exit the loop if the parsing is successful
+            except ValueError:
+                continue  # Try the next format string
+
+        if timestamp is None:
+            print(f"Error: '{entry_published}' does not match any of the expected formats.")
         
         article = NewsArticle(
             headline=entry.get("title"),
