@@ -1,0 +1,1 @@
+- Ultimately logic and heavy processing would be split to the backend ('api') and frontend logic would be delegated to the 'app', but keeping all the content from the streamlit implementation in a separate folder for now for ease of access.
